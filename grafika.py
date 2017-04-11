@@ -114,7 +114,7 @@ def DrawGLScene():
 	# 	glTranslatef(0.09, -0.09, 0)
 	# Move Right 3.0 units.
 	polyShapeRed = []
-	with open('dragonRbener.txt') as r:
+	with open('nagaariR.txt') as r:
 	    for line in r:
 			line = line.split() # to deal with blank 
 			if line:
@@ -134,7 +134,7 @@ def DrawGLScene():
 	# glEnd()
 
 	polyShapeGreen = []
-	with open('dragonGbener.txt') as g:
+	with open('nagaariG.txt') as g:
 	    for line in g:
 			line = line.split() # to deal with blank 
 			if line:
@@ -154,7 +154,7 @@ def DrawGLScene():
 	# glEnd()
 
 	polyShapeBlue = []
-	with open('dragonBbener.txt') as g:
+	with open('nagaariB.txt') as g:
 	    for line in g:
 			line = line.split() # to deal with blank 
 			if line:
