@@ -111,6 +111,19 @@ def DrawSun(radius, degree):
 		glVertex3f(math.cos(degInRad)*radius,math.sin(degInRad)*radius,1);
 	glEnd()
 
+def DrawAwan(radius, degree):
+	glBegin(GL_TRIANGLE_FAN) 
+	DEG2RAD = 3.14159/180;
+	glColor3f(1,1,1);
+	glVertex3f(0.0, 0.0,1);
+
+	glColor3f(0, 0.7, 1.0) 
+	import math
+	for i in range(0,degree):
+		degInRad = i*DEG2RAD;
+		glVertex3f(math.cos(degInRad)*radius,math.sin(degInRad)*radius,1);
+	glEnd()
+
 def DrawCircleRing(radius):
 	
 	DEG2RAD = 3.14159/180;
@@ -232,11 +245,414 @@ def DrawGLScene():
 	glVertex3f(0.2, -3.7, 0.7)         # Bottom Left
 	glEnd()                             # We are done with the polygon
 
+
+	glTranslatef(-0.7,0,0) # mataharinya gw geser dikit yak
+
 	glTranslatef(1.5, 0.5, 0)
 	DrawSun(0.4,361)
 	DrawCircleRing(0.5)
 
-	
+	glTranslatef(0.7,0,0) # mataharinya gw geser dikit yak
+
+
+	############################################################################################################
+	# gambar awan!!!
+	# kode Dyas, maap chaos, blom terlalu ngerti
+
+	# awan 1
+
+	xAwan1 = 1.6
+	yAwan1 = -0.25
+	zAwan1 = 0
+	ukuran = 0.3
+
+	# buletan
+	geserX = xAwan1
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*7/4
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran*0.75,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*9.5/4
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran/2,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran/2
+	geserY = yAwan1 + ukuran*1.5/4
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran/2
+	geserY = yAwan1 - ukuran*1.5/4
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*5/4
+	geserY = yAwan1 + ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*5/4
+	geserY = yAwan1 - ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 - ukuran/2
+	geserY = yAwan1 + ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 - ukuran/2
+	geserY = yAwan1 - ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+
+	# awan 2
+
+	xAwan1 = 0.3
+	yAwan1 = -1.2
+	zAwan1 = 0
+	ukuran = 0.25
+
+	# buletan
+	geserX = xAwan1
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*7/4
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran*0.75,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*9.5/4
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran/2,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran/2
+	geserY = yAwan1 + ukuran*1.5/4
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran/2
+	geserY = yAwan1 - ukuran*1.5/4
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*5/4
+	geserY = yAwan1 + ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*5/4
+	geserY = yAwan1 - ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 - ukuran/2
+	geserY = yAwan1 + ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 - ukuran/2
+	geserY = yAwan1 - ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# awan 3
+
+	xAwan1 = 1.9
+	yAwan1 = -1.3
+	zAwan1 = 0
+	ukuran = 0.2
+
+	# buletan
+	geserX = xAwan1
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*7/4
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran*0.75,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*9.5/4
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran/2,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran/2
+	geserY = yAwan1 + ukuran*1.5/4
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran/2
+	geserY = yAwan1 - ukuran*1.5/4
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*5/4
+	geserY = yAwan1 + ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*5/4
+	geserY = yAwan1 - ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 - ukuran/2
+	geserY = yAwan1 + ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 - ukuran/2
+	geserY = yAwan1 - ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# awan 4
+
+	xAwan1 = 0.6
+	yAwan1 = -0.55
+	zAwan1 = 0
+	ukuran = 0.15
+
+	# buletan
+	geserX = xAwan1
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*7/4
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran*0.75,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*9.5/4
+	geserY = yAwan1
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran/2,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran/2
+	geserY = yAwan1 + ukuran*1.5/4
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran/2
+	geserY = yAwan1 - ukuran*1.5/4
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*5/4
+	geserY = yAwan1 + ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 + ukuran*5/4
+	geserY = yAwan1 - ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 - ukuran/2
+	geserY = yAwan1 + ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+	# buletan
+	geserX = xAwan1 - ukuran/2
+	geserY = yAwan1 - ukuran/8
+	geserZ = zAwan1
+
+	glTranslatef(geserX, geserY, geserZ)
+	DrawAwan(ukuran,361)
+	glTranslatef(-geserX, -geserY, geserZ) # balikin lagi biar ga ngefek ke bawah2nya
+
+
+
+
+	# gambar awan beres
+	############################################################################################################
 
 	glTranslatef(-3.3, -2.5, 0)
 	DrawPelangi()
