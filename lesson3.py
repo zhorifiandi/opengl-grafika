@@ -131,7 +131,7 @@ def main():
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 	
 	# get a 640 x 480 window 
-	glutInitWindowSize(640, 480)
+	glutInitWindowSize(960, 720)
 	
 	# the window starts at the upper left corner of the screen 
 	glutInitWindowPosition(0, 0)
@@ -139,7 +139,7 @@ def main():
 	# Okay, like the C version we retain the window id to use when closing, but for those of you new
 	# to Python (like myself), remember this assignment would make the variable local and not global
 	# if it weren't for the global declaration at the start of main.
-	window = glutCreateWindow("Tugas Grafika Huahaha")
+	window = glutCreateWindow("Tugas Grafika lalalala")
 
    	# Register the drawing function with glut, BUT in Python land, at least using PyOpenGL, we need to
 	# set the function pointer and invoke a function to actually register the callback, otherwise it
@@ -165,6 +165,6 @@ def main():
 	glutMainLoop()
 
 # Print message to console, and kick off the main to get it rolling.
-print "Hit ESC key to quit."
+ # print "Hit ESC key to quit."
 main()
     	
