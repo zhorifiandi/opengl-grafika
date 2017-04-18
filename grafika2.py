@@ -75,7 +75,30 @@ def ReSizeGLScene(Width, Height):
     gluPerspective(45.0, float(Width)/float(Height), 0.1, 100.0)
     glMatrixMode(GL_MODELVIEW)
 
-def DrawCircle(radius):
+def DrawCircle(radius, degree, r, g, b,z):
+
+	DEG2RAD = 3.14159/180;
+	glBegin(GL_LINE_STRIP) 
+	glColor3f(r, g, b) 
+	import math
+	for i in range(0,degree):
+		degInRad = i*DEG2RAD;
+		glVertex3f(math.cos(degInRad)*radius,math.sin(degInRad)*radius,z);
+	glEnd()
+
+def DrawCirclePart(radius, degree, r, g, b):
+
+	DEG2RAD = 3.14159/180;
+	glBegin(GL_LINE_STRIP) 
+	glColor3f(r, g, b) 
+	import math
+	for i in range(0,degree):
+		degInRad = i*DEG2RAD;
+		glVertex3f(math.cos(degInRad)*radius,math.sin(degInRad)*radius,0.5);
+	glEnd()
+
+
+def DrawSun(radius, degree):
 	glBegin(GL_TRIANGLE_FAN) 
 	DEG2RAD = 3.14159/180;
 	glColor3f(1,0,0);
@@ -83,7 +106,7 @@ def DrawCircle(radius):
 
 	glColor3f(1.0, 0.7, 0.0) 
 	import math
-	for i in range(0,361):
+	for i in range(0,degree):
 		degInRad = i*DEG2RAD;
 		glVertex3f(math.cos(degInRad)*radius,math.sin(degInRad)*radius,1);
 	glEnd()
@@ -95,12 +118,44 @@ def DrawCircleRing(radius):
 	glColor3f(1.0, 0.7, 0.0) 
 	import math
 	for i in range(0,360):
-		if (i % 40 == 0):
+		if (i % 30 == 19):
+			glLineWidth(10);	
 			glBegin(GL_LINES) 
 			degInRad = i*DEG2RAD;
+
 			glVertex3f(math.cos(degInRad)*radius,math.sin(degInRad)*radius,1);
-			glVertex3f(math.cos(degInRad)*radius + math.cos(degInRad)*(radius+0.2),math.sin(degInRad)*radius+math.sin(degInRad)*(radius+0.2),1);
+			glVertex3f(math.cos(degInRad)*radius + math.cos(degInRad)*(radius+0.1),math.sin(degInRad)*radius+math.sin(degInRad)*(radius+0.1),1);
 			glEnd()
+
+
+def DrawPelangi():
+	r = 1; 
+	g = 0; 
+	b = 0;
+	radius = 0.025
+	degree = 130
+	
+	#Merah ke Kuning
+	red = 1
+	green = 0	
+	for i in xrange(1,20):
+		green = float(i) / 20
+		DrawCirclePart(1+i*radius,degree,red,green,0);
+
+	#Kuning ke Hijau
+	red = 1
+	green = 1
+	for i in xrange(1,20):
+		red = 1 - (float(i) / 20)
+		DrawCirclePart(1+(19+i)*radius,degree,red,green,0);
+
+	#Hijau ke Biru
+	blue = 0
+	green = 1
+	for i in xrange(1,20):
+		green = 1 - (float(i) / 20)
+		blue = (float(i) / 20)
+		DrawCirclePart(1+(38+i)*radius,degree,0,green,blue);
 
 # The main drawing function. 
 def DrawGLScene():
@@ -110,17 +165,143 @@ def DrawGLScene():
 
 	# Move Left 1.5 units and into the screen 6.0 units.
 	glTranslatef(-1.5, 0.5, -6.0)
-	glColor3f(0.3, 0.5, 1.0)            # Bluish shade
+	# DrawPelangi(1,1,5,5)
+
+	
 	glBegin(GL_QUADS)                   # Start drawing a 4 sided polygon
-	glVertex3f(-4.0, 4.0, 0.0)          # Top Left
-	glVertex3f(5.0, 4.0, 0.0)           # Top Right
-	glVertex3f(5.0, -4.0, 0.0)          # Bottom Right
-	glVertex3f(-4.0, -4.0, 0.0)         # Bottom Left
+	glColor3f(1, 0.5, 0.50)            # Bluish shade
+	glVertex3f(-10.0, 4.0, 0.0)          # Top Left
+	glVertex3f(8.0, 4.0, 0.0)           # Top Right
+	glColor3f(0.3, 0.5, 1.0)            # Bluish shade
+	glVertex3f(8.0, -4.0, 0.0)          # Bottom Right
+	glVertex3f(-7.0, -4.0, 0.0)         # Bottom Left
 	glEnd()
 
-	glTranslatef(1.5, 0.8, 0)
-	DrawCircle(0.4)
+	#Matahari
+	glTranslatef(2.5, 1.3, 0)
+
+
+	glTranslatef(-2.5, -2.3, 0)
+	# gambar pohon
+	glColor3f(0.82,0.41,0.11)            # Bluish shade
+	glBegin(GL_QUADS)                   # Start drawing a 4 sided polygon
+	glVertex3f(4.0, -1.0, 0.725)          # Top Left
+	glVertex3f(3.8, -1.0, 0.725)           # Top Right
+	glVertex3f(3.8, -2.4, 0.725)          # Bottom Right
+	glVertex3f(4.0, -2.4, 0.725)         # Bottom Left
+	glEnd()
+
+	# gambar daun - daun
+	glBegin(GL_POLYGON)                 # Start drawing a polygon
+	glColor3f(0.0, 0.5, 0.0)            # green
+	glVertex3f(3.85, 0.0, 0.75)           # Top
+	glColor3f(0.0, 0.0, 0.0)            # Green
+	glVertex3f(4.25, -1.5, 0.75)          # Bottom Right
+	glColor3f(0.0, 0.0, 0.0)            # green
+	glVertex3f(3.45, -1.5, 0.75)         # Bottom Left
+	glEnd()                             # We are done with the polygon
+
+	# gambar daun - daun
+	glBegin(GL_POLYGON)                 # Start drawing a polygon
+	glColor3f(0.0, 0.5, 0.0)            # green
+	glVertex3f(3.85, 0.5, 0.85)           # Top
+	glColor3f(0.0, 0.5, 0.0)            # Green
+	glVertex3f(4.25, -1.0, 0.85)          # Bottom Right
+	glColor3f(0.0, 0.0, 0.0)            # green
+	glVertex3f(3.45, -1.0, 0.85)         # Bottom Left
+	glEnd()                             # We are done with the polygon
+
+	glTranslatef(0.5, 1.8, 0)
+	# gambar gunung segitiga kiri
+	glBegin(GL_POLYGON)                 # Start drawing a polygon
+	glColor3f(0.0, 1.0, 0.0)            # green
+	glVertex3f(0.0, -1.0, 0.6)           # Top
+	glColor3f(0.0, 0.0, 0.0)            # Green
+	glVertex3f(2.8, -3.7, 0.6)          # Bottom Right
+	glColor3f(0.0, 0.0, 0.0)            # green
+	glVertex3f(-2.8, -3.7, 0.6)         # Bottom Left
+	glEnd()                             # We are done with the polygon
+
+	# gambar gunung segitiga kanan
+	glBegin(GL_POLYGON)                 # Start drawing a polygon
+	glColor3f(0.0, 1.0, 0.0)            # green
+	glVertex3f(3.0, -1.0, 0.7)           # Top
+	glColor3f(0.0, 0.0, 0.0)            # Green
+	glVertex3f(4.8, -3.7, 0.7)          # Bottom Right
+	glColor3f(0.0, 0.0, 0.0)            # green
+	glVertex3f(0.2, -3.7, 0.7)         # Bottom Left
+	glEnd()                             # We are done with the polygon
+
+	glTranslatef(1.5, 0.5, 0)
+	DrawSun(0.4,361)
 	DrawCircleRing(0.5)
+
+	
+
+	glTranslatef(-3.3, -2.5, 0)
+	DrawPelangi()
+
+	glTranslatef(-1, 0.2, 0)
+	# gambar pohon
+	glColor3f(0.82,0.41,0.11)            # Bluish shade
+	glBegin(GL_QUADS)                   # Start drawing a 4 sided polygon
+	glVertex3f(4.0, -1.0, 0.725)          # Top Left
+	glVertex3f(3.8, -1.0, 0.725)           # Top Right
+	glVertex3f(3.8, -2.4, 0.725)          # Bottom Right
+	glVertex3f(4.0, -2.4, 0.725)         # Bottom Left
+	glEnd()
+
+	# gambar daun - daun
+	glBegin(GL_POLYGON)                 # Start drawing a polygon
+	glColor3f(0.0, 0.5, 0.0)            # green
+	glVertex3f(3.85, 0.0, 0.75)           # Top
+	glColor3f(0.0, 0.0, 0.0)            # Green
+	glVertex3f(4.25, -1.5, 0.75)          # Bottom Right
+	glColor3f(0.0, 0.0, 0.0)            # green
+	glVertex3f(3.45, -1.5, 0.75)         # Bottom Left
+	glEnd()                             # We are done with the polygon
+
+	# gambar daun - daun
+	glBegin(GL_POLYGON)                 # Start drawing a polygon
+	glColor3f(0.0, 0.5, 0.0)            # green
+	glVertex3f(3.85, 0.5, 0.85)           # Top
+	glColor3f(0.0, 0.5, 0.0)            # Green
+	glVertex3f(4.25, -1.0, 0.85)          # Bottom Right
+	glColor3f(0.0, 0.0, 0.0)            # green
+	glVertex3f(3.45, -1.0, 0.85)         # Bottom Left
+	glEnd()                             # We are done with the polygon
+
+	glTranslatef(-2, 0, 0)
+	# gambar pohon
+	glColor3f(0.82,0.41,0.11)            # Bluish shade
+	glBegin(GL_QUADS)                   # Start drawing a 4 sided polygon
+	glVertex3f(4.0, -1.0, 0.725)          # Top Left
+	glVertex3f(3.8, -1.0, 0.725)           # Top Right
+	glVertex3f(3.8, -2.4, 0.725)          # Bottom Right
+	glVertex3f(4.0, -2.4, 0.725)         # Bottom Left
+	glEnd()
+
+	# gambar daun - daun
+	glBegin(GL_POLYGON)                 # Start drawing a polygon
+	glColor3f(0.0, 0.5, 0.0)            # green
+	glVertex3f(3.85, 0.0, 0.75)           # Top
+	glColor3f(0.0, 0.0, 0.0)            # Green
+	glVertex3f(4.25, -1.5, 0.75)          # Bottom Right
+	glColor3f(0.0, 0.0, 0.0)            # green
+	glVertex3f(3.45, -1.5, 0.75)         # Bottom Left
+	glEnd()                             # We are done with the polygon
+
+	# gambar daun - daun
+	glBegin(GL_POLYGON)                 # Start drawing a polygon
+	glColor3f(0.0, 0.5, 0.0)            # green
+	glVertex3f(3.85, 0.5, 0.85)           # Top
+	glColor3f(0.0, 0.5, 0.0)            # Green
+	glVertex3f(4.25, -1.0, 0.85)          # Bottom Right
+	glColor3f(0.0, 0.0, 0.0)            # green
+	glVertex3f(3.45, -1.0, 0.85)         # Bottom Left
+	glEnd()                             # We are done with the polygon
+
+
 	# Since we have smooth color mode on, this will be great for the Phish Heads :-).
 	# Draw a triangle
 	
@@ -148,7 +329,7 @@ def main():
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 	
 	# get a 640 x 480 window 
-	glutInitWindowSize(640, 480)
+	glutInitWindowSize(900, 600)
 	
 	# the window starts at the upper left corner of the screen 
 	glutInitWindowPosition(0, 0)
@@ -176,7 +357,7 @@ def main():
 	glutKeyboardFunc(keyPressed)
 
 	# Initialize our window. 
-	InitGL(640, 480)
+	InitGL(900, 600)
 
 	# Start Event Processing Engine	
 	glutMainLoop()
