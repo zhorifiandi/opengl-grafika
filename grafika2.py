@@ -117,7 +117,7 @@ def DrawAwan(radius, degree):
 	glColor3f(1,1,1);
 	glVertex3f(0.0, 0.0,1);
 
-	glColor3f(0, 0.7, 1.0) 
+	glColor3f(0.84, 0.98, 1.0) 
 	import math
 	for i in range(0,degree):
 		degInRad = i*DEG2RAD;
@@ -182,10 +182,10 @@ def DrawGLScene():
 
 	
 	glBegin(GL_QUADS)                   # Start drawing a 4 sided polygon
-	glColor3f(1, 0.5, 0.50)            # Bluish shade
+	glColor3f(1, 0.7, 0.50)            # Bluish shade
 	glVertex3f(-10.0, 4.0, 0.0)          # Top Left
 	glVertex3f(8.0, 4.0, 0.0)           # Top Right
-	glColor3f(0.3, 0.5, 1.0)            # Bluish shade
+	glColor3f(0.3, 0.9, 1.0)            # Bluish shade
 	glVertex3f(8.0, -4.0, 0.0)          # Bottom Right
 	glVertex3f(-7.0, -4.0, 0.0)         # Bottom Left
 	glEnd()
