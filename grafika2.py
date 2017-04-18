@@ -124,7 +124,7 @@ def DrawCircleRing(radius):
 			degInRad = i*DEG2RAD;
 
 			glVertex3f(math.cos(degInRad)*radius,math.sin(degInRad)*radius,1);
-			glVertex3f(math.cos(degInRad)*radius + math.cos(degInRad)*(radius+0.1),math.sin(degInRad)*radius+math.sin(degInRad)*(radius+0.1),1);
+			glVertex3f(math.cos(degInRad)*radius + 0.25*math.cos(degInRad)*(radius+0.1),math.sin(degInRad)*radius+0.25*math.sin(degInRad)*(radius+0.1),1);
 			glEnd()
 
 
