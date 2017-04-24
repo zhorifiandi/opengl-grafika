@@ -86,27 +86,150 @@ def DrawGLScene():
 
 	# Since we have smooth color mode on, this will be great for the Phish Heads :-).
 	# Draw a triangle
-	glBegin(GL_POLYGON)                 # Start drawing a polygon
-	glColor3f(1.0, 0.0, 0.0)            # Red
-	glVertex3f(0.0, 1.0, 0.0)           # Top
-	glColor3f(0.0, 1.0, 0.0)            # Green
-	glVertex3f(1.0, -1.0, 0.0)          # Bottom Right
-	glColor3f(0.0, 0.0, 1.0)            # Blue
-	glVertex3f(-1.0, -1.0, 0.0)         # Bottom Left
-	glEnd()                             # We are done with the polygon
-
-
+	
+	# for x in range (0, 100):
+	# 	glBegin(GL_POLYGON)                 # Start drawing a polygon
+	# 	red = green = blue = 0.0;
+	# 	if (x % 3 == 0):
+	# 		red = 255
+	# 	elif (x % 3 == 1):
+	# 		green = 255
+	# 	else:
+	# 		blue = 255
+	# 	glColor3f(red, green, blue)            # Red
+	# 	glVertex3f(0.0, 0.0, 0.0)           # Top
+	# 	# # glColor3f(0.0, 255, 0.0)            # Green
+	# 	glVertex3f(0.6, -0.6, 0.0)          # Bottom Right
+	# 	# # glColor3f(0.0, 0.0, 255)            # Blue
+	# 	glVertex3f(-0.2, -0.5, 0.0)         # Bottom Left
+	# 	# glVertex3f(0.5,0.5,0)
+	# 	# glVertex3f(0.5,-0.5,0)
+	# 	# glVertex3f(-0.5,0.5,0)
+	# 	# glVertex3f(-0.5,-0.5,0)
+	# 	# glVertex3f(0.380,0.124,0)
+	# 	# glVertex3f(0.382,0.113,0)
+	# 	# glVertex3f(0.370,0.94,0)
+	# 	# glVertex3f(0.367,0.104,0)
+	# 	glEnd()                             # We are done with the polygon
+	# 	glTranslatef(0.09, -0.09, 0)
 	# Move Right 3.0 units.
-	glTranslatef(3.0, 0.0, 0.0)
+	polyShapeRed = []
+	with open('nagaariR.txt') as r:
+	    for line in r:
+			line = line.split() # to deal with blank 
+			if line:
+				line = [int(i) for i in line]
+				polyShapeRed.append(line)
 
-	# Draw a square (quadrilateral)
-	glColor3f(0.3, 0.5, 1.0)            # Bluish shade
-	glBegin(GL_QUADS)                   # Start drawing a 4 sided polygon
-	glVertex3f(-1.0, 1.0, 0.0)          # Top Left
-	glVertex3f(1.0, 1.0, 0.0)           # Top Right
-	glVertex3f(1.0, -1.0, 0.0)          # Bottom Right
-	glVertex3f(-1.0, -1.0, 0.0)         # Bottom Left
-	glEnd()                             # We are done with the polygon
+	glBegin(GL_POINTS)
+	# i = j = 0
+	# for a in polyShapeRed:
+	# 	j = 0
+	# 	for b in a:
+	# 		if (b < 200):
+	# 			glColor3f(b, 0, 0)
+	# 			glVertex3f(j,-i,0)
+	# 		j+=0.01
+	# 	i+=0.01
+	# glEnd()
+
+	polyShapeGreen = []
+	with open('nagaariG.txt') as g:
+	    for line in g:
+			line = line.split() # to deal with blank 
+			if line:
+				line = [int(i) for i in line]
+				polyShapeGreen.append(line)
+
+	# glBegin(GL_POINTS)
+	# i = j = 0
+	# for a in polyShapeGreen:
+	# 	j = 0
+	# 	for b in a:
+	# 		if (b < 200):
+	# 			glColor3f(0, b, 0)
+	# 			glVertex3f(j,-i,0)
+	# 		j+=0.01
+	# 	i+=0.01
+	# glEnd()
+
+	polyShapeBlue = []
+	with open('nagaariB.txt') as g:
+	    for line in g:
+			line = line.split() # to deal with blank 
+			if line:
+				line = [int(i) for i in line]
+				polyShapeBlue.append(line)
+
+	w, h = 550, 300
+	colorMatrixRed = [[0 for x in range(w)] for y in range(h)]
+	colorMatrixGreen = [[0 for x in range(w)] for y in range(h)]
+	colorMatrixBlue = [[0 for x in range(w)] for y in range(h)]
+
+	i = 0
+	j = 0
+	for a in polyShapeRed:
+		j = 0
+		for b in a:
+			colorMatrixRed[i][j] = b
+			j+=1
+		i+=1
+
+	i = 0
+	j = 0
+	for a in polyShapeGreen:
+		j = 0
+		for b in a:
+			colorMatrixGreen[i][j] = b
+			j+=1
+		i+=1
+
+	i = 0
+	j = 0
+	for a in polyShapeBlue:
+		j = 0
+		for b in a:
+			colorMatrixBlue[i][j] = b
+			j+=1
+		i+=1
+
+	# glBegin(GL_POINTS)
+	i = j = 0
+	it = jt = 0
+	for a in polyShapeBlue:
+		j = 0
+		jt = 0
+		for b in a:
+			if (colorMatrixRed[it][jt] + colorMatrixGreen[it][jt] + colorMatrixBlue[it][jt] < 700):
+				glColor3f(float(colorMatrixRed[it][jt])/255, float(colorMatrixGreen[it][jt])/255, float(colorMatrixBlue[it][jt])/255)
+				glVertex3f(j,-i,0)
+			j+=0.01
+			jt += 1
+		i+=0.01
+		it+=1
+	glEnd()
+
+	# glTranslatef(0.09, -0.1, 0);
+	# glBegin(GL_POLYGON);
+	# glColor3f(1,0,0);
+	# glVertex3f(4,1,0);
+	# glVertex3f(4,-3.5,0);
+	# glVertex3f(3,0,0);
+	# glEnd();
+
+
+
+
+
+
+	# # Draw a square (quadrilateral)
+	# glColor3f(0.3, 0.5, 1.0)            # Bluish shade
+	# glBegin(GL_QUADS)                   # Start drawing a 4 sided polygon
+	# glVertex3f(-0.5, 1.0, 0.0)          # Top Left
+	# glVertex3f(1.0, 1.0, 0.0)           # Top Right
+	# glVertex3f(1.0, -1.0, 0.0)          # Bottom Right
+	# glVertex3f(-1.0, -1.0, 0.0)         # Bottom Left
+	# glEnd()                             # We are done with the polygon
 
 	#  since this is double buffered, swap the buffers to display what just got drawn. 
 	glutSwapBuffers()
@@ -131,7 +254,7 @@ def main():
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 	
 	# get a 640 x 480 window 
-	glutInitWindowSize(960, 720)
+	glutInitWindowSize(640, 480)
 	
 	# the window starts at the upper left corner of the screen 
 	glutInitWindowPosition(0, 0)
@@ -139,7 +262,7 @@ def main():
 	# Okay, like the C version we retain the window id to use when closing, but for those of you new
 	# to Python (like myself), remember this assignment would make the variable local and not global
 	# if it weren't for the global declaration at the start of main.
-	window = glutCreateWindow("Tugas Grafika lalalala")
+	window = glutCreateWindow("Tugas Grafika Huahaha")
 
    	# Register the drawing function with glut, BUT in Python land, at least using PyOpenGL, we need to
 	# set the function pointer and invoke a function to actually register the callback, otherwise it
@@ -165,6 +288,88 @@ def main():
 	glutMainLoop()
 
 # Print message to console, and kick off the main to get it rolling.
- # print "Hit ESC key to quit."
+print "Hit ESC key to quit."
 main()
-    	
+# class  Color:
+# 	def __init__(self,red):
+# 		self.red = red
+# 		self.green = 0
+# 		self.blue = 0
+
+# polyShapeRed = []
+# polyShapeGreen = []
+# polyShapeBlue = []
+# w, h = 550, 300
+# colorMatrixRed = [[0 for x in range(w)] for y in range(h)]
+# colorMatrixGreen = [[0 for x in range(w)] for y in range(h)]
+# colorMatrixBlue = [[0 for x in range(w)] for y in range(h)]
+# with open('dragon2R.txt') as r:
+#     for line in r:
+# 		line = line.split() # to deal with blank 
+# 		if line:
+# 			line = [int(i) for i in line]
+# 			polyShapeRed.append(line)
+
+# with open('dragon2G.txt') as g:
+#     for line in r:
+# 		line = line.split() # to deal with blank 
+# 		if line:
+# 			line = [int(i) for i in line]
+# 			polyShapeGreen.append(line)
+
+# with open('dragon2B.txt') as b:
+#     for line in r:
+# 		line = line.split() # to deal with blank 
+# 		if line:
+# 			line = [int(i) for i in line]
+# 			polyShapeBlue.append(line)
+# #with open('dragon2G.txt') as g:
+
+# #for int
+
+# i = 0
+# j = 0
+# for a in polyShapeRed:
+# 	j = 0
+# 	for b in a:
+# 		colorMatrixRed[i][j] = b
+# 		j+=1
+# 	i+=1
+
+# i = 0
+# j = 0
+# for a in polyShapeGreen:
+# 	j = 0
+# 	for b in a:
+# 		colorMatrixGreen[i][j] = b
+# 		j+=1
+# 	i+=1
+
+# i = 0
+# j = 0
+# for a in polyShapeBlue:
+# 	j = 0
+# 	for b in a:
+# 		colorMatrixBlue[i][j] = b
+# 		j+=1
+# 	i+=1
+
+# for i in range(0,300):
+# 	for j in range(0,550):
+# 		print colorMatrixRed[i][j],
+# 	print i, 
+# 	print j,
+# 	print "\n"
+
+# with open('dragon2G.txt') as g:
+#     for line in g:
+# 		line = line.split() # to deal with blank 
+# 		if line:
+# 			line = [int(i) for i in line]
+# 			polyShapeGreen.append(line)
+
+# for a in polyShapeGreen:
+# 	for b in a:
+# 		colorMatrix
+	
+
