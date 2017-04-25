@@ -5,7 +5,8 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import sys
-from Image import *
+from PIL.Image import open
+# from PIL import Image
 
 # Some api in the chain is translating the keystrokes to this octal string
 # so instead of saying: ESCAPE = 27, we use the following.
@@ -27,7 +28,7 @@ def LoadTextures():
     
     ix = image.size[0]
     iy = image.size[1]
-    image = image.tostring("raw", "RGBX", 0, -1)
+    image = image.tobytes("raw", "RGBX", 0, -1)
     
     # Create Texture    
     glBindTexture(GL_TEXTURE_2D, glGenTextures(1))   # 2d texture (x and y size)
@@ -79,19 +80,19 @@ def DrawGLScene():
     
     glClearColor(0.5,0.5,0.5,1.0)            
     
-    glEnable(GL_FOG)                         # Enable fog
+    # glEnable(GL_FOG)                         # Enable fog
     
-    glFogi(GL_FOG_MODE, GL_LINEAR)           # Set fog settings
+    # glFogi(GL_FOG_MODE, GL_LINEAR)           # Set fog settings
     
-    glFogfv(GL_FOG_COLOR, fogColor);         # Set fog color
+    # glFogfv(GL_FOG_COLOR, fogColor);         # Set fog color
     
-    glFogf(GL_FOG_DENSITY, 0.15);            # Set fog density
+    # glFogf(GL_FOG_DENSITY, 0.15);            # Set fog density
     
-    glHint(GL_FOG_HINT, GL_DONT_CARE);       # Set Hint
+    # glHint(GL_FOG_HINT, GL_DONT_CARE);       # Set Hint
     
-    glFogf(GL_FOG_START, 1.0);               # Fog start 
+    # glFogf(GL_FOG_START, 1.0);               # Fog start 
     
-    glFogf(GL_FOG_END, 5.0);                 # Fog end
+    # glFogf(GL_FOG_END, 5.0);                 # Fog end
 
     
     glTranslatef(0.0,0.0,-5.0)            # Move Into The Screen
