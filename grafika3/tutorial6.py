@@ -97,9 +97,9 @@ def bind_texture(texture_id,mode):
 def load_image(file_name):
     im = pil_open(file_name)
     try:
-        width,height,image = im.size[0], im.size[1], im.tostring("raw", "RGBA", 0, -1)
+        width,height,image = im.size[0], im.size[1], im.tobytes("raw", "RGBX", 0, -1)
     except SystemError:
-        width,height,image = im.size[0], im.size[1], im.tostring("raw", "RGBX", 0, -1)
+        width,height,image = im.size[0], im.size[1], im.tobytes("raw", "RGBX", 0, -1)
 
     texture_id =  glGenTextures(1)
 
@@ -148,43 +148,50 @@ def main():
 
     # Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
     # A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
+    koordinat = 0.01
+    koordinat2 = 0.5
+    koordinat3 = 1.7
+    koordinat4 = 1.0
+    koordinat5 = 1.7
+    koordinat6 = 0.1
+
     vertex_data = [ 
-        -1.0,-1.0,-1.0,
-        -1.0,-1.0, 1.0,
-        -1.0, 1.0, 1.0,
-         1.0, 1.0,-1.0,
-        -1.0,-1.0,-1.0,
-        -1.0, 1.0,-1.0,
-         1.0,-1.0, 1.0,
-        -1.0,-1.0,-1.0,
-         1.0,-1.0,-1.0,
-         1.0, 1.0,-1.0,
-         1.0,-1.0,-1.0,
-        -1.0,-1.0,-1.0,
-        -1.0,-1.0,-1.0,
-        -1.0, 1.0, 1.0,
-        -1.0, 1.0,-1.0,
-         1.0,-1.0, 1.0,
-        -1.0,-1.0, 1.0,
-        -1.0,-1.0,-1.0,
-        -1.0, 1.0, 1.0,
-        -1.0,-1.0, 1.0,
-         1.0,-1.0, 1.0,
-         1.0, 1.0, 1.0,
-         1.0,-1.0,-1.0,
-         1.0, 1.0,-1.0,
-         1.0,-1.0,-1.0,
-         1.0, 1.0, 1.0,
-         1.0,-1.0, 1.0,
-         1.0, 1.0, 1.0,
-         1.0, 1.0,-1.0,
-        -1.0, 1.0,-1.0,
-         1.0, 1.0, 1.0,
-        -1.0, 1.0,-1.0,
-        -1.0, 1.0, 1.0,
-         1.0, 1.0, 1.0,
-        -1.0, 1.0, 1.0,
-         1.0,-1.0, 1.0]
+        -koordinat2,-koordinat3,-koordinat,
+        -koordinat2,-koordinat3, koordinat6,
+        -koordinat2, koordinat5, koordinat6,
+         koordinat4, koordinat5,-koordinat,
+        -koordinat2,-koordinat3,-koordinat,
+        -koordinat2, koordinat5,-koordinat,
+         koordinat4,-koordinat3, koordinat6,
+        -koordinat2,-koordinat3,-koordinat,
+         koordinat4,-koordinat3,-koordinat,
+         koordinat4, koordinat5,-koordinat,
+         koordinat4,-koordinat3,-koordinat,
+        -koordinat2,-koordinat3,-koordinat,
+        -koordinat2,-koordinat3,-koordinat,
+        -koordinat2, koordinat5, koordinat6,
+        -koordinat2, koordinat5,-koordinat,
+         koordinat4,-koordinat3, koordinat6,
+        -koordinat2,-koordinat3, koordinat6,
+        -koordinat2,-koordinat3,-koordinat,
+        -koordinat2, koordinat5, koordinat6,
+        -koordinat2,-koordinat3, koordinat6,
+         koordinat4,-koordinat3, koordinat6,
+         koordinat4, koordinat5, koordinat6,
+         koordinat4,-koordinat3,-koordinat,
+         koordinat4, koordinat5,-koordinat,
+         koordinat4,-koordinat3,-koordinat,
+         koordinat4, koordinat5, koordinat6,
+         koordinat4,-koordinat3, koordinat6,
+         koordinat4, koordinat5, koordinat6,
+         koordinat4, koordinat5,-koordinat,
+        -koordinat2, koordinat5,-koordinat,
+         koordinat4, koordinat5, koordinat6,
+        -koordinat2, koordinat5,-koordinat,
+        -koordinat2, koordinat5, koordinat6,
+         koordinat4, koordinat5, koordinat6,
+        -koordinat2, koordinat5, koordinat6,
+         koordinat4,-koordinat3, koordinat6]
 
     # Two UV coordinatesfor each vertex. They were created withe Blender.
     uv_data = [ 

@@ -98,9 +98,9 @@ def bind_texture(texture_id,mode):
 def load_image(file_name):
     im = pil_open(file_name)
     try:
-        width,height,image = im.size[0], im.size[1], im.tostring("raw", "RGBA", 0, -1)
+        width,height,image = im.size[0], im.size[1], im.tobytes("raw", "RGBX", 0, -1)
     except SystemError:
-        width,height,image = im.size[0], im.size[1], im.tostring("raw", "RGBX", 0, -1)
+        width,height,image = im.size[0], im.size[1], im.tobytes("raw", "RGBX", 0, -1)
 
     texture_id =  glGenTextures(1)
 
@@ -153,32 +153,157 @@ def main():
     model_matrix_id = glGetUniformLocation(program_id, "M")
 
     # Load the texture
-    texture = load_image(".\\content\\uvmap_suzanne.bmp")
+    texture = load_image(".\\content\\oppo.bmp") #load image
 
     # Get a handle for our "myTextureSampler" uniform
     texture_id  = glGetUniformLocation(program_id, "myTextureSampler")
 
     # Read our OBJ file
-    vertices,faces,uvs,normals,colors = objloader.load(".\\content\\suzanne.obj")
-    vertex_data,uv_data,normal_data = objloader.process_obj( vertices,faces,uvs,normals,colors)
+    # vertices,faces,uvs,normals,colors = objloader.load(".\\content\\suzanne.obj")
+    # vertex_data,uv_data,normal_data = objloader.process_obj( vertices,faces,uvs,normals,colors)
 
     # Our OBJ loader uses Python lists, convert to ctype arrays before sending to OpenGL
-    vertex_data = objloader.generate_2d_ctypes(vertex_data)
-    uv_data = objloader.generate_2d_ctypes(uv_data)
-    normal_data = objloader.generate_2d_ctypes(normal_data)
+    # vertex_data = objloader.generate_2d_ctypes(vertex_data)
+    # uv_data = objloader.generate_2d_ctypes(uv_data)
+
+    koordinat = 0.01
+    koordinat2 = 0.5
+    koordinat3 = 1.7
+    koordinat4 = 1.0
+    koordinat5 = 1.7
+    koordinat6 = 0.1
+
+    vertex_data = [ 
+        -koordinat2,-koordinat3,-koordinat,
+        -koordinat2,-koordinat3, koordinat6,
+        -koordinat2, koordinat5, koordinat6,
+         koordinat4, koordinat5,-koordinat,
+        -koordinat2,-koordinat3,-koordinat,
+        -koordinat2, koordinat5,-koordinat,
+         koordinat4,-koordinat3, koordinat6,
+        -koordinat2,-koordinat3,-koordinat,
+         koordinat4,-koordinat3,-koordinat,
+         koordinat4, koordinat5,-koordinat,
+         koordinat4,-koordinat3,-koordinat,
+        -koordinat2,-koordinat3,-koordinat,
+        -koordinat2,-koordinat3,-koordinat,
+        -koordinat2, koordinat5, koordinat6,
+        -koordinat2, koordinat5,-koordinat,
+         koordinat4,-koordinat3, koordinat6,
+        -koordinat2,-koordinat3, koordinat6,
+        -koordinat2,-koordinat3,-koordinat,
+        -koordinat2, koordinat5, koordinat6,
+        -koordinat2,-koordinat3, koordinat6,
+         koordinat4,-koordinat3, koordinat6,
+         koordinat4, koordinat5, koordinat6,
+         koordinat4,-koordinat3,-koordinat,
+         koordinat4, koordinat5,-koordinat,
+         koordinat4,-koordinat3,-koordinat,
+         koordinat4, koordinat5, koordinat6,
+         koordinat4,-koordinat3, koordinat6,
+         koordinat4, koordinat5, koordinat6,
+         koordinat4, koordinat5,-koordinat,
+        -koordinat2, koordinat5,-koordinat,
+         koordinat4, koordinat5, koordinat6,
+        -koordinat2, koordinat5,-koordinat,
+        -koordinat2, koordinat5, koordinat6,
+         koordinat4, koordinat5, koordinat6,
+        -koordinat2, koordinat5, koordinat6,
+         koordinat4,-koordinat3, koordinat6]
+
+    # Two UV coordinatesfor each vertex. They were created withe Blender.
+    uv_data = [ 
+        0.000059, 1.0-0.000004, 
+        0.000103, 1.0-0.336048, 
+        0.335973, 1.0-0.335903, 
+        1.000023, 1.0-0.000013, 
+        0.667979, 1.0-0.335851, 
+        0.999958, 1.0-0.336064, 
+        0.667979, 1.0-0.335851, 
+        0.336024, 1.0-0.671877, 
+        0.667969, 1.0-0.671889, 
+        1.000023, 1.0-0.000013, 
+        0.668104, 1.0-0.000013, 
+        0.667979, 1.0-0.335851, 
+        0.000059, 1.0-0.000004, 
+        0.335973, 1.0-0.335903, 
+        0.336098, 1.0-0.000071, 
+        0.667979, 1.0-0.335851, 
+        0.335973, 1.0-0.335903, 
+        0.336024, 1.0-0.671877, 
+        1.000004, 1.0-0.671847, 
+        0.999958, 1.0-0.336064, 
+        0.667979, 1.0-0.335851, 
+        0.668104, 1.0-0.000013, 
+        0.335973, 1.0-0.335903, 
+        0.667979, 1.0-0.335851, 
+        0.335973, 1.0-0.335903, 
+        0.668104, 1.0-0.000013, 
+        0.336098, 1.0-0.000071, 
+        0.000103, 1.0-0.336048, 
+        0.000004, 1.0-0.671870, 
+        0.336024, 1.0-0.671877, 
+        0.000103, 1.0-0.336048, 
+        0.336024, 1.0-0.671877, 
+        0.335973, 1.0-0.335903, 
+        0.667969, 1.0-0.671889, 
+        1.000004, 1.0-0.671847, 
+        0.667979, 1.0-0.335851]
+
+    normal_data = [ 
+        -0.5, 0, 0,
+        -0.5, 0, 0,
+        -0.5, 0, 0,
+         0, 0,-0.5,
+         0, 0,-0.5,
+         0, 0,-0.5,
+         0,-0.5, 0,
+         0,-0.5, 0,
+         0,-0.5, 0,
+         0, 0,-0.5,
+         0, 0,-0.5,
+         0, 0,-0.5,
+        -0.5, 0, 0,
+        -0.5, 0, 0,
+        -0.5, 0, 0,
+         0,-0.5, 0,
+         0,-0.5, 0,
+         0,-0.5, 0,
+         0, 0, 1,
+         0, 0, 1,
+         0, 0, 1,
+         1, 0, 0,
+         1, 0, 0,
+         1, 0, 0,
+         1, 0, 0,
+         1, 0, 0,
+         1, 0, 0,
+         0, 1, 0,
+         0, 1, 0,
+         0, 1, 0,
+         0, 1, 0,
+         0, 1, 0,
+         0, 1, 0,
+         0, 0, 1,
+         0, 0, 1,
+         0, 0, 1]
 
     # Load OBJ in to a VBO
     vertex_buffer = glGenBuffers(1);
+    array_type = GLfloat * len(vertex_data)
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer)
-    glBufferData(GL_ARRAY_BUFFER, len(vertex_data) * 4 * 3, vertex_data, GL_STATIC_DRAW)
+    glBufferData(GL_ARRAY_BUFFER, len(vertex_data) * 4, array_type(*vertex_data), GL_STATIC_DRAW)
 
-    uv_buffer = glGenBuffers(1)
+    uv_buffer = glGenBuffers(1);
+    array_type = GLfloat * len(uv_data)
     glBindBuffer(GL_ARRAY_BUFFER, uv_buffer)
-    glBufferData(GL_ARRAY_BUFFER, len(uv_data) * 4 * 2, uv_data, GL_STATIC_DRAW)
+    glBufferData(GL_ARRAY_BUFFER, len(uv_data) * 4, array_type(*uv_data), GL_STATIC_DRAW)
 
-    normal_buffer = glGenBuffers(1)
+    normal_buffer = glGenBuffers(1);
+    array_type = GLfloat * len(normal_data)
     glBindBuffer(GL_ARRAY_BUFFER, normal_buffer)
-    glBufferData(GL_ARRAY_BUFFER, len(normal_data) * 4 * 3, normal_data, GL_STATIC_DRAW)
+    glBufferData(GL_ARRAY_BUFFER, len(normal_data) * 4, array_type(*normal_data), GL_STATIC_DRAW)
+
 
     # vsync and glfw do not play nice.  when vsync is enabled mouse movement is jittery.
     common.disable_vsyc()
